@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MilfestFlowers_samarqand.com - Gullar va Guldastalar Yetkazib Berish</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="/" class="logo-wrap">
+        <span class="brand-title">MilfestFlowers_samarqand.com</span>
+        <span class="brand-sub">Samarqand Onlayn Gul Do'koni</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#catalog">Katalog</a></li>
+        <li><a href="#about">Biz haqimizda</a></li>
+        <li><a href="#delivery">Yetkazib berish</a></li>
+        <li><a href="#contact">Aloqa</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="{{ store.STORE_INSTAGRAM }}" target="_blank" class="insta-btn">
+          <span>Instagram</span>
+        </a>
+
+        <button class="cart-icon-btn" onclick="toggleCartDrawer(true)" aria-label="Savatcha">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="cart-badge" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="hero-tag">✨ Samarqand bo'ylab tezkor yetkazib berish</span>
+        <h1 class="hero-title">Eng nozik hislaringizni <span>gullar bilan</span> ifoda eting</h1>
+        <p class="hero-desc">
+          Har doim yangi va saralangan gullar, original kompozitsiyalar hamda yaqinlaringiz uchun kutilmagan sovg'alar. 
+          Buyurtma bering, biz esa bir zumda manzilga yetkazamiz!
+        </p>
+        <div class="hero-btns">
+          <a href="#catalog" class="btn-primary">
+            <span>Gullarni tanlash</span>
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="{{ store.STORE_INSTAGRAM }}" target="_blank" class="btn-secondary">Instagram sahifa</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=900&q=80" alt="Melfis Flowers Samarqand" class="hero-img">
+        <div class="hero-card">
+          <div class="hero-card-icon">💐</div>
+          <div>
+            <div class="hero-card-title">100% Yangi gullar</div>
+            <div class="hero-card-sub">Har kuni to'g'ridan-to'g'ri yetkazib kelinadi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features-section">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon">🚀</div>
+          <div>
+            <div class="feature-title">Tezkor yetkazish</div>
+            <div class="feature-text">Samarqand shahrida 60-90 daqiqada</div>
+          </div>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">💌</div>
+          <div>
+            <div class="feature-title">Bepul tabriknoma</div>
+            <div class="feature-text">Har bir guldasta bilan bepul taqdim etiladi</div>
+          </div>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">📸</div>
+          <div>
+            <div class="feature-title">Yetkazishdan oldin foto</div>
+            <div class="feature-text">Guldastani jo'natishdan oldin rasmga olib ko'rsatamiz</div>
+          </div>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">⭐</div>
+          <div>
+            <div class="feature-title">Premium sifat</div>
+            <div class="feature-text">Gollandiya va Ekvador saralangan atirgullari</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog Section -->
+  <section class="catalog-section" id="catalog">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">Bizning to'plam</span>
+        <h2 class="section-title">Eng sara gullar va kompozitsiyalar</h2>
+      </div>
+
+      <!-- Categories Filter -->
+      <div class="category-filter">
+        {% for cat in categories %}
+          <button class="filter-btn {% if loop.first %}active{% endif %}" data-category="{{ cat.id }}">
+            {{ cat.name }}
+          </button>
+        {% endfor %}
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid">
+        {% for p in products %}
+          <div class="product-card" data-category="{{ p.category }}">
+            <div class="card-img-wrap">
+              <img src="{{ p.image }}" alt="{{ p.name }}" class="card-img" loading="lazy">
+              {% if p.badge %}
+                <span class="card-badge">{{ p.badge }}</span>
+              {% endif %}
+            </div>
+
+            <div class="card-body">
+              <span class="card-category">{{ p.category_name }}</span>
+              <h3 class="card-title">{{ p.name }}</h3>
+              <p class="card-desc">{{ p.description }}</p>
+
+              <div class="card-bottom">
+                <div class="card-price-wrap">
+                  <span class="card-price">{{ "{:,}".format(p.price) }} so'm</span>
+                  {% if p.old_price %}
+                    <span class="card-old-price">{{ "{:,}".format(p.old_price) }} so'm</span>
+                  {% endif %}
+                </div>
+
+                <button class="add-cart-btn" onclick="addToCart({{ p.id }}, '{{ p.name }}', {{ p.price }}, '{{ p.image }}')" title="Savatchaga qo'shish">
+                  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Delivery Section -->
+  <section class="features-section" id="delivery" style="background: #fff; padding: 60px 0;">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="section-tag">Xizmatlar</span>
+          <h2 class="section-title" style="margin-bottom: 20px;">Samarqand bo'ylab qulay yetkazib berish</h2>
+          <p style="color: var(--gray-dark); margin-bottom: 16px;">
+            Siz O'zbekistonning yoki dunyoning istalgan burchagida bo'lsangiz ham, Samarqanddagi yaqinlaringizni xushnud etishingiz mumkin.
+          </p>
+          <ul style="list-style: none; color: var(--gray-dark); display: flex; flex-direction: column; gap: 12px;">
+            <li>✓ Shahar bo'ylab yetkazib berish narxi: <b>{{ "{:,}".format(store.DELIVERY_COST_CITY) }} so'm</b></li>
+            <li>✓ <b>{{ "{:,}".format(store.DELIVERY_FREE_FROM) }} so'mdan</b> yuqori xaridlarga <b>BEPUL</b> yetkazib berish</li>
+            <li>✓ Aniq vaqtda manzilga kutilmagan sovg'a sifatida topshirish (syurpriz qilish)</li>
+            <li>✓ Do'kondan o'zingiz olib ketishingiz (samovivoz) ham mumkin</li>
+          </ul>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=800&q=80" alt="Flower delivery" style="width: 100%; border-radius: 20px; box-shadow: var(--shadow);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Melfis Flowers Samarqand</div>
+          <p class="footer-text">
+            Samarqand shahridagi eng zamonaviy va nafis gullar saloni. Har bir guldastani sevgi va e'tibor bilan yaratamiz.
+          </p>
+          <div style="margin-top: 16px;">
+            <a href="{{ store.STORE_INSTAGRAM }}" target="_blank" style="color: #f472b6; text-decoration: none; font-weight: 600;">
+              📷 Instagram: @samarqand.melfisflowers
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-heading">Aloqa</div>
+          <ul class="footer-links">
+            <li>Telefon: <a href="tel:{{ store.STORE_PHONE }}">{{ store.STORE_PHONE }}</a></li>
+            <li>Ish vaqti: {{ store.STORE_WORKING_HOURS }}</li>
+            <li>Manzil: {{ store.STORE_ADDRESS }}</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Kategoriyalar</div>
+          <ul class="footer-links">
+            <li><a href="#catalog">Atirgullar</a></li>
+            <li><a href="#catalog">Guldastalar</a></li>
+            <li><a href="#catalog">Qutidagi gullar</a></li>
+            <li><a href="#catalog">Sovg'alar</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 MilfestFlowers_samarqand.com. Barcha huquqlar himoyalangan.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <div class="modal-overlay" id="cart-overlay" onclick="toggleCartDrawer(false)"></div>
+  <div class="drawer" id="cart-drawer">
+    <div class="drawer-header">
+      <h3 class="drawer-title" id="drawer-title-text">Savatcha</h3>
+      <button class="close-btn" onclick="toggleCartDrawer(false)">&times;</button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Empty Cart -->
+      <div class="empty-cart-view" id="empty-cart">
+        <div class="empty-icon">🛒</div>
+        <h4>Savatchangiz bo'sh</h4>
+        <p style="color: var(--gray-dark); font-size: 14px; margin-top: 8px;">Katalogdan yoqqan guldastani tanlang va savatchaga qo'shing.</p>
+      </div>
+
+      <!-- Items Section -->
+      <div id="cart-items-section">
+        <div id="cart-items-container"></div>
+
+        <div id="cart-content" style="display: none; margin-top: 24px;">
+          <button class="btn-primary" style="width: 100%;" onclick="showCheckoutView()">
+            Rasmiylashtirishga o'tish
+          </button>
+        </div>
+      </div>
+
+      <!-- Checkout Form Section -->
+      <div id="checkout-form-section" style="display: none;">
+        <button onclick="showCartView()" style="background: none; border: none; color: var(--primary); font-size: 13px; font-weight: 600; cursor: pointer; margin-bottom: 16px;">
+          ← Savatchaga qaytish
+        </button>
+
+        <form id="checkout-form">
+          <div class="delivery-toggle">
+            <div class="toggle-option active" data-type="delivery">🚗 Yetkazib berish</div>
+            <div class="toggle-option" data-type="pickup">🏬 Olib ketish</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Ismingiz *</label>
+            <input type="text" name="name" class="form-input" placeholder="Ismingizni kiriting" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Telefon raqamingiz *</label>
+            <input type="tel" name="phone" class="form-input" placeholder="+998 90 123 45 67" required>
+          </div>
+
+          <div class="form-group" id="delivery-address-group">
+            <label class="form-label">Yetkazib berish manzili *</label>
+            <textarea name="address" class="form-textarea" rows="2" placeholder="Samarqand sh., ko'cha, uy / mo'ljal"></textarea>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Yetkazish sanasi</label>
+              <input type="date" name="date" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Yetkazish vaqti</label>
+              <input type="time" name="time" class="form-input">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">💌 Tabriknoma matni (bepul)</label>
+            <textarea name="card_note" class="form-textarea" rows="2" placeholder="Masalan: Tug'ilgan kuningiz bilan tabriklayman!"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Qo'shimcha izoh</label>
+            <input type="text" name="comment" class="form-input" placeholder="Masalan: Qo'ng'iroq qilmasdan topshiring (syurpriz)">
+          </div>
+
+          <button type="submit" class="btn-primary checkout-btn">
+            Buyurtmani tasdiqlash
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Summary footer -->
+    <div class="drawer-footer">
+      <div class="summary-row">
+        <span>Mahsulotlar narxi:</span>
+        <span id="summary-subtotal" style="font-weight: 600;">0 so'm</span>
+      </div>
+      <div class="summary-row">
+        <span>Yetkazib berish:</span>
+        <span id="summary-delivery" style="font-weight: 600;">0 so'm</span>
+      </div>
+      <div class="summary-row total">
+        <span>Jami to'lov:</span>
+        <span id="summary-total">0 so'm</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
+

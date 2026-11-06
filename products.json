@@ -1,0 +1,91 @@
+[
+  {
+    "id": 1,
+    "name": "Qizil atirgullar to'plami (51 dona)",
+    "category": "roses",
+    "category_name": "Atirgullar",
+    "price": 650000,
+    "old_price": 750000,
+    "image": "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80",
+    "badge": "Xit savdo",
+    "description": "51 dona saralangan premium qizil atirgul. Maxsus qadoq va atlas lenta bilan o'ralgan. Sevgi va ehtirom ifodasi."
+  },
+  {
+    "id": 2,
+    "name": "Oq va pushti pion kompozitsiyasi",
+    "category": "bouquets",
+    "category_name": "Guldastalar",
+    "price": 520000,
+    "old_price": null,
+    "image": "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80",
+    "badge": "Yangi",
+    "description": "Mayin pushti va oq rangli xushbo'y pionlar, evkalipt barglari bilan uyg'unlikda."
+  },
+  {
+    "id": 3,
+    "name": "Premial qutidagi guldasta 'Melfis Dream'",
+    "category": "boxes",
+    "category_name": "Qutidagi gullar",
+    "price": 480000,
+    "old_price": 550000,
+    "image": "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80",
+    "badge": "Tavsiya",
+    "description": "Dumaloq baxmal qutida tayyorlangan nozik gullar to'plami. Suv idishi bilan 7-10 kungacha so'lmay turadi."
+  },
+  {
+    "id": 4,
+    "name": "101 dona Gollandiya atirgullari",
+    "category": "roses",
+    "category_name": "Atirgullar",
+    "price": 1250000,
+    "old_price": 1400000,
+    "image": "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=800&q=80",
+    "badge": "Premial",
+    "description": "Eng yuqori toifadagi 101 dona qizil va oq atirgullar uyg'unligi. Unutilmas xursandchilik uchun."
+  },
+  {
+    "id": 5,
+    "name": "Bahoriy lolalar jamlanmasi (25 dona)",
+    "category": "bouquets",
+    "category_name": "Guldastalar",
+    "price": 350000,
+    "old_price": null,
+    "image": "https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&w=800&q=80",
+    "badge": null,
+    "description": "Rang-barang yorqin lolalar. Bahoriy kayfiyat bag'ishlovchi samimiy sovg'a."
+  },
+  {
+    "id": 6,
+    "name": "Romantik sharlar va gullar to'plami",
+    "category": "gifts",
+    "category_name": "Sovg'alar & Sharlar",
+    "price": 390000,
+    "old_price": 450000,
+    "image": "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80",
+    "badge": "To'plam",
+    "description": "Guldasta, geliy bilan to'ldirilgan yurak shaklidagi sharlar va bepul tabriknoma."
+  },
+  {
+    "id": 7,
+    "name": "Elegance xrizantema va eustoma",
+    "category": "bouquets",
+    "category_name": "Guldastalar",
+    "price": 310000,
+    "old_price": null,
+    "image": "https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=800&q=80",
+    "badge": null,
+    "description": "Uzoq saqlanuvchi to'yimli xrizantemalar va nozik fransuz eustomasi."
+  },
+  {
+    "id": 8,
+    "name": "Yurak shaklidagi shirinlik va gul qutisi",
+    "category": "boxes",
+    "category_name": "Qutidagi gullar",
+    "price": 590000,
+    "old_price": 680000,
+    "image": "https://images.unsplash.com/photo-1546842931-886c185b4c8c?auto=format&fit=crop&w=800&q=80",
+    "badge": "Romantika",
+    "description": "Bir tomonida jonli yangi gullar, ikkinchi tomonida Ferrero Rocher yoki Rafaello shirinliklari."
+  }
+]
+
