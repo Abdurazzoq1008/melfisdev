@@ -1,8 +1,12 @@
-// Sakura (gilos guli) barglarining tushishi va kursorga ta'sirlanish animatsiyasi
+// Sakura (gilos guli) barglarining to'kilishi va sichqonchaga reaksiyasi
 (function() {
-  const canvas = document.createElement('canvas');
-  canvas.id = 'sakura-canvas';
-  document.body.prepend(canvas);
+  // Canvas elementini yaratish va sahifaga ulash
+  let canvas = document.getElementById('sakura-canvas');
+  if (!canvas) {
+    canvas = document.createElement('canvas');
+    canvas.id = 'sakura-canvas';
+    document.body.appendChild(canvas);
+  }
 
   const ctx = canvas.getContext('2d');
   let width = (canvas.width = window.innerWidth);
@@ -13,10 +17,11 @@
     height = canvas.height = window.innerHeight;
   });
 
+  // Sichqoncha pozitsiyasi va ta'sir doirasi
   const mouse = {
-    x: -1000,
-    y: -1000,
-    radius: 120, // Sichqoncha ta'sir doirasi
+    x: -2000,
+    y: -2000,
+    radius: 140, // Sichqoncha ta'sir radiusi
     active: false
   };
 
@@ -28,13 +33,13 @@
 
   window.addEventListener('mouseleave', () => {
     mouse.active = false;
-    mouse.x = -1000;
-    mouse.y = -1000;
+    mouse.x = -2000;
+    mouse.y = -2000;
   });
 
-  // Touch screen (mobil) uchun
+  // Mobil qurilmalarda teginish (touch) uchun
   window.addEventListener('touchmove', (e) => {
-    if (e.touches.length > 0) {
+    if (e.touches && e.touches.length > 0) {
       mouse.x = e.touches[0].clientX;
       mouse.y = e.touches[0].clientY;
       mouse.active = true;
@@ -43,11 +48,11 @@
 
   window.addEventListener('touchend', () => {
     mouse.active = false;
-    mouse.x = -1000;
-    mouse.y = -1000;
+    mouse.x = -2000;
+    mouse.y = -2000;
   });
 
-  // Sakura bargi klassi
+  // Sakura gul bargi klassi
   class Petal {
     constructor() {
       this.reset(true);
@@ -55,59 +60,60 @@
 
     reset(initial = false) {
       this.x = Math.random() * width;
-      this.y = initial ? Math.random() * height : -30 - Math.random() * 50;
-      this.size = Math.random() * 12 + 18; // Barg hajmi 18px - 30px ga kattalashtirildi
-      this.speedY = Math.random() * 1.3 + 0.9; // Tushish tezligi
-      this.speedX = Math.random() * 1.1 - 0.2; // Shamol yo'nalishi
+      this.y = initial ? Math.random() * height : -30 - Math.random() * 60;
+      this.size = Math.random() * 10 + 14; // Barg kattaligi (14px - 24px)
+      this.speedY = Math.random() * 1.2 + 0.8; // Pastga tushish tezligi
+      this.speedX = Math.random() * 0.8 - 0.2; // Yengil shamol oqimi
       this.rotation = Math.random() * Math.PI * 2;
-      this.rotationSpeed = (Math.random() - 0.5) * 0.025;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.03;
       this.flip = Math.random() * Math.PI;
       this.flipSpeed = Math.random() * 0.03 + 0.01;
-      this.opacity = Math.random() * 0.4 + 0.6;
+      this.opacity = Math.random() * 0.35 + 0.65;
       
-      // Mayin pushti sakura ranglari
+      // Mayin sakura pushti ranglar palitrasi
       const colors = [
-        'rgba(255, 183, 197, ',  // Klassik och pushti
-        'rgba(255, 192, 203, ',  // Pushti
-        'rgba(255, 218, 224, ',  // Juda nozik pushti
-        'rgba(244, 166, 183, ',  // To'qroq sakura
-        'rgba(255, 228, 235, '   // Oqimtir-pushti
+        'rgba(255, 183, 197, ', // Klassik och pushti
+        'rgba(255, 192, 203, ', // Sakura pushti
+        'rgba(255, 218, 224, ', // Oqish pushti
+        'rgba(244, 154, 175, ', // Jonli pushti
+        'rgba(255, 228, 235, '  // Mayin shaffof pushti
       ];
       this.baseColor = colors[Math.floor(Math.random() * colors.length)];
       
-      // Kursor turtkisi uchun qo'shimcha tezliklar
+      // Sichqoncha ta'siridagi turtki tezliklari
       this.pushVx = 0;
       this.pushVy = 0;
     }
 
     update() {
-      // Sichqoncha yaqinlashganda barglarning itarilishi (reaksiyasi)
+      // Sichqoncha yaqinlashganda barglarning itarilishi (reaksiya)
       if (mouse.active) {
         const dx = this.x - mouse.x;
         const dy = this.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < mouse.radius && dist > 0) {
-          const force = (1 - dist / mouse.radius) * 7;
+          // Yaqinroq bo'lganda kuchliroq itarilish kuchi
+          const force = (1 - dist / mouse.radius) * 6;
           const angle = Math.atan2(dy, dx);
-          this.pushVx += Math.cos(angle) * force * 0.4;
-          this.pushVy += Math.sin(angle) * force * 0.4;
-          this.rotationSpeed += (Math.random() - 0.5) * 0.08;
+          this.pushVx += Math.cos(angle) * force * 0.45;
+          this.pushVy += Math.sin(angle) * force * 0.45;
+          this.rotationSpeed += (Math.random() - 0.5) * 0.06;
         }
       }
 
-      // Inersiya so'nishi
+      // Kuchning sekin-asta so'nishi (inersiya)
       this.pushVx *= 0.92;
       this.pushVy *= 0.92;
 
-      // Pozitsiyani yangilash
-      this.x += this.speedX + Math.sin(this.flip) * 0.6 + this.pushVx;
+      // Pozitsiyani siljitish va tebranish berish
+      this.x += this.speedX + Math.sin(this.flip) * 0.7 + this.pushVx;
       this.y += this.speedY + this.pushVy;
       this.rotation += this.rotationSpeed;
       this.flip += this.flipSpeed;
 
-      // Ekrandan chiqib ketganda qayta boshlash
-      if (this.y > height + 30 || this.x < -40 || this.x > width + 40) {
+      // Ekranning pastki yoki yon chegaralaridan chiqqanda yuqoridan yangitdan tushirish
+      if (this.y > height + 40 || this.x < -50 || this.x > width + 50) {
         this.reset();
       }
     }
@@ -119,21 +125,21 @@
       ctx.scale(Math.cos(this.flip), 1);
 
       ctx.beginPath();
-      // Tabiiy sakura gul bargi shakli (yuraksimon / bargsimon)
+      // Tabiiy sakura bargining chiroyli yuraksimon egri chizig'i
       ctx.moveTo(0, -this.size);
-      ctx.bezierCurveTo(this.size * 0.8, -this.size * 0.8, this.size * 0.9, this.size * 0.3, 0, this.size);
-      ctx.bezierCurveTo(-this.size * 0.9, this.size * 0.3, -this.size * 0.8, -this.size * 0.8, 0, -this.size);
+      ctx.bezierCurveTo(this.size * 0.85, -this.size * 0.85, this.size * 0.9, this.size * 0.4, 0, this.size);
+      ctx.bezierCurveTo(-this.size * 0.9, this.size * 0.4, -this.size * 0.85, -this.size * 0.85, 0, -this.size);
       
       ctx.fillStyle = this.baseColor + this.opacity + ')';
-      ctx.shadowColor = 'rgba(255, 182, 193, 0.4)';
+      ctx.shadowColor = 'rgba(255, 182, 193, 0.35)';
       ctx.shadowBlur = 4;
       ctx.fill();
 
-      // Barg o'rtasidagi nozik tomir
+      // Barg markazidagi nafis chiziq (tomiri)
       ctx.beginPath();
       ctx.moveTo(0, -this.size * 0.7);
       ctx.lineTo(0, this.size * 0.6);
-      ctx.strokeStyle = 'rgba(240, 140, 160, ' + (this.opacity * 0.3) + ')';
+      ctx.strokeStyle = 'rgba(235, 130, 155, ' + (this.opacity * 0.35) + ')';
       ctx.lineWidth = 1;
       ctx.stroke();
 
@@ -141,13 +147,14 @@
     }
   }
 
-  // Barglar soni (ekran hajmiga moslab hisoblanadi va soni ko'paytirildi)
-  const petalCount = Math.min(Math.floor(width / 22), 70);
+  // Ekran kengligiga mos barglar soni
+  const petalCount = Math.min(Math.floor(width / 24), 60);
   const petals = [];
   for (let i = 0; i < petalCount; i++) {
     petals.push(new Petal());
   }
 
+  // Animatsiya sikli
   function animate() {
     ctx.clearRect(0, 0, width, height);
     for (let i = 0; i < petals.length; i++) {
@@ -159,4 +166,3 @@
 
   animate();
 })();
-
