@@ -1,3 +1,10 @@
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.env
+venv/
+.venv/
+# config.py ni GitHubga yuklamang (maxfiy token bor)!
+config.py
 

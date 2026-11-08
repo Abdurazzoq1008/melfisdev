@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MilfestFlowers_samarqand.com - Gullar va Guldastalar Yetkazib Berish</title>
+  <title>Melfis_flow3rs_samarqand - Gullar va Guldastalar Yetkazib Berish</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,10 +16,12 @@
 <body>
 
   <!-- Header -->
+
   <header class="header">
+
     <div class="container nav-container">
       <a href="/" class="logo-wrap">
-        <span class="brand-title">MilfestFlowers_samarqand.com</span>
+        <span class="brand-title">Melfis_flow3rs_samarqand</span>
         <span class="brand-sub">Samarqand Onlayn Gul Do'koni</span>
       </a>
 
@@ -31,6 +33,7 @@
       </ul>
 
       <div class="nav-actions">
+    <button id="theme-toggle" aria-label="Toggle night mode" style="background:none;border:none;font-size:1.5rem;cursor:pointer;">🌙</button>
         <a href="{{ store.STORE_INSTAGRAM }}" target="_blank" class="insta-btn">
           <span>Instagram</span>
         </a>
@@ -159,7 +162,7 @@
                   {% endif %}
                 </div>
 
-                <button class="add-cart-btn" onclick="addToCart({{ p.id }}, '{{ p.name }}', {{ p.price }}, '{{ p.image }}')" title="Savatchaga qo'shish">
+                <button class="add-cart-btn" data-id="{{ p.id }}" data-name="{{ p.name }}" data-price="{{ p.price }}" data-image="{{ p.image }}" onclick="addToCart(this.dataset.id, this.dataset.name, Number(this.dataset.price), this.dataset.image)" title="Savatchaga qo'shish">
                   <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
@@ -173,7 +176,7 @@
   </section>
 
   <!-- About / Delivery Section -->
-  <section class="features-section" id="delivery" style="background: #fff; padding: 60px 0;">
+  <section class="features-section" id="delivery" style="padding: 60px 0;">
     <div class="container">
       <div class="hero-grid">
         <div>
@@ -340,7 +343,9 @@
   <!-- Toast Notification -->
   <div id="toast" class="toast"></div>
 
+  <script src="/static/script.js"></script>
   <script src="/static/app.js"></script>
+  <script src="/static/sakura.js"></script>
 </body>
 </html>
 

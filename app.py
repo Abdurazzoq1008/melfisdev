@@ -35,7 +35,7 @@ def send_telegram_order(order_data):
     delivery_title = "🚗 Yetkazib berish (Dostavka)" if delivery_type == "delivery" else "🏬 Do'kondan olib ketish (Samovivoz)"
 
     message = (
-        f"🌸 <b>YANGI BUYURTMA | MilfestFlowers_samarqand.com</b> 🌸\n\n"
+        f"🌸 <b>YANGI BUYURTMA | Melfis_flow3rs_samarqand</b> 🌸\n\n"
         f"<b>Mijoz:</b> {customer.get('name', '-')}\n"
         f"<b>Telefon:</b> {customer.get('phone', '-')}\n"
         f"<b>Turi:</b> {delivery_title}\n"
